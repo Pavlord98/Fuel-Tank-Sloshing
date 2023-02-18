@@ -18,5 +18,9 @@ I used the geometry, displacement, and initial water level parameters as seen in
 
 ## Geometry and Mesh
 
+I made the geometry in SolidWorks in accordance to the drawings from the paper, and then labeled the patches in Blender in order to prepare the geometry for meshing. 
 
-  
+Here you can see a render of the geometry with the baffles added:
+
+![untitled](https://user-images.githubusercontent.com/84512701/219875106-a873c240-d7b7-46d2-a300-82da9a2ed9f6.png)
+
