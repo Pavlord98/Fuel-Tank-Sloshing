@@ -24,3 +24,16 @@ Here you can see a render of the geometry with the baffles added:
 
 ![untitled](https://user-images.githubusercontent.com/84512701/219875106-a873c240-d7b7-46d2-a300-82da9a2ed9f6.png)
 
+I did the meshing with the snappyHexMesh tool with simple parameters and a additional refinement to the cells in the aproximate height of the ininital water level.
+
+![Screenshot 2023-02-18 164817](https://user-images.githubusercontent.com/84512701/219875287-8b1a3845-01a2-4016-82ae-b117362686b9.png)
+
+## Numerical Model
+
+For this simulation I used interFoam, which is a transient, incompressible, turbulent, immisible, isothermal, VOF solver.
+
+For the turbulence model I used the K Omega SST model and initialized the their values using these [recommendations](https://turbmodels.larc.nasa.gov/sst.html).
+
+## Results and postprocessing
+
+
