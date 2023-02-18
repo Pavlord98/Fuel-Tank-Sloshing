@@ -36,4 +36,6 @@ For the turbulence model I used the K Omega SST model and initialized the their 
 
 ## Results and postprocessing
 
+![results](https://user-images.githubusercontent.com/84512701/219876698-d09b46eb-80fc-465a-8443-ac42bc3989b6.png)
 
+I expected to see an obvious reduction of sloshing with the added baffles, but based on visual results this isn't very clear. Additional simulations are needed with porous baffles and I plan on doing that soon. Other than that, I should also try the simulations with larger or quicker displacements. 
