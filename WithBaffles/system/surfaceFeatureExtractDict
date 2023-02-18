@@ -1,0 +1,34 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:                                        |
+|   \\  /    A nd           | Web:      www.openfoam.com; www.openfoam.org    |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      surfaceFeatureExtractDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+//inlet1.stl{extractionMethod extractFromSurface; includedAngle 150;}
+//inlet2.stl{extractionMethod extractFromSurface; includedAngle 150;}
+//inlet3.stl{extractionMethod extractFromSurface; includedAngle 150;}
+//inlet4.stl{extractionMethod extractFromSurface; includedAngle 150;}
+//inlet5.stl{extractionMethod extractFromSurface; includedAngle 150;}
+//outlet1.stl{extractionMethod extractFromSurface; includedAngle 150;}
+//outlet2.stl{extractionMethod extractFromSurface; includedAngle 150;}
+//outlet3.stl{extractionMethod extractFromSurface; includedAngle 150;}
+//outlet4.stl{extractionMethod extractFromSurface; includedAngle 150;}
+//outlet5.stl{extractionMethod extractFromSurface; includedAngle 150;}
+wall1.stl{extractionMethod extractFromSurface; includedAngle 150;}
+baffle1.stl{extractionMethod extractFromSurface; includedAngle 150;}
+baffle2.stl{extractionMethod extractFromSurface; includedAngle 150;}
+baffle3.stl{extractionMethod extractFromSurface; includedAngle 150;}
+//wall5.stl{extractionMethod extractFromSurface; includedAngle 150;}
+//sphere1.stl{extractionMethod extractFromSurface; includedAngle 180;}
+
+// ************************************************************************* //

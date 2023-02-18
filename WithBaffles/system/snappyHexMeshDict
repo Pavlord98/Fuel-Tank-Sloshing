@@ -1,0 +1,225 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:                                        |
+|   \\  /    A nd           | Web:      www.openfoam.com; www.openfoam.org    |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      snappyHexMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+    castellatedMesh true;
+    snap            true;
+    addLayers       true;
+
+    geometry
+    {
+//       inlet1.stl{ type triSurfaceMesh; name inlet1;}
+//       inlet2.stl{ type triSurfaceMesh; name inlet2;}
+//       inlet3.stl{ type triSurfaceMesh; name inlet3;}
+//       inlet4.stl{ type triSurfaceMesh; name inlet4;}
+//       inlet5.stl{ type triSurfaceMesh; name inlet5;}
+//       outlet1.stl{ type triSurfaceMesh; name outlet1;}
+//       outlet2.stl{ type triSurfaceMesh; name outlet2;}
+//       outlet3.stl{ type triSurfaceMesh; name outlet3;}
+//       outlet4.stl{ type triSurfaceMesh; name outlet4;}
+//       outlet5.stl{ type triSurfaceMesh; name outlet5;}
+        wall1.stl{ type triSurfaceMesh; name wall1;}
+		baffle1.stl{ type triSurfaceMesh; name baffle1;}
+      baffle2.stl{ type triSurfaceMesh; name baffle2;}
+      baffle3.stl{ type triSurfaceMesh; name baffle3;}
+//       wall5.stl{ type triSurfaceMesh; name wall5;}
+//		sphere1.stl{ type triSurfaceMesh; name sphere1;}
+		boxWaterLevel
+		{
+			type    searchableBox;       // region defined by bounding box
+				min     (-1 -1 0.04);
+				max     (1   0 0.09);	
+		}
+    }
+
+    castellatedMeshControls
+    {
+        maxLocalCells 1000000;
+        maxGlobalCells 80000000;
+        minRefinementCells 0;
+        maxLoadUnbalance 0.10;
+        nCellsBetweenLevels 2;
+        features
+        (
+//          { file inlet1.eMesh; level 0;}
+//          { file inlet2.eMesh; level 2;}
+//          { file inlet3.eMesh; level 2;}
+//          { file inlet4.eMesh; level 2;}
+//          { file inlet5.eMesh; level 2;}
+//          { file outlet1.eMesh; level 0;}
+//          { file outlet2.eMesh; level 2;}
+//          { file outlet3.eMesh; level 2;}
+//          { file outlet4.eMesh; level 2;}
+//          { file outlet5.eMesh; level 2;}
+          { file baffle1.eMesh; level 2;}
+          { file baffle2.eMesh; level 2;}
+          { file baffle3.eMesh; level 2;}
+          { file wall1.eMesh; level 1;}
+//          { file wall5.eMesh; level 2;}
+//          { file sphere1.eMesh; level 2;}
+        );
+        refinementSurfaces
+        {
+          inlet1{ level (0 0); patchInfo{type patch;}}
+//          inlet2{ level (2 2); patchInfo{type patch;}}
+//          inlet3{ level (2 2); patchInfo{type patch;}}
+//          inlet4{ level (2 2); patchInfo{type patch;}}
+//          inlet5{ level (2 2); patchInfo{type patch;}}
+//          outlet1{ level (0 0); patchInfo{type patch;}}
+//          outlet2{ level (1 1); patchInfo{type patch;}}
+//          outlet3{ level (1 1); patchInfo{type patch;}}
+//          outlet4{ level (2 2); patchInfo{type patch;}}
+//          outlet5{ level (2 2); patchInfo{type patch;}}
+          wall1{ level (1 1); patchInfo{type wall;}}
+          baffle1{ level (2 2); patchInfo{type wall;}}
+          baffle2{ level (2 2); patchInfo{type wall;}}
+          baffle3{ level (2 2); patchInfo{type wall;}}
+//          wall5{ level (2 2); patchInfo{type wall;}}
+//          sphere1{ level (2 2); patchInfo{type wall;}}
+        }
+        resolveFeatureAngle 60;
+        refinementRegions
+        {
+		boxWaterLevel
+			{
+				mode inside;
+				levels ((1.0 2));          
+				
+			}
+        }
+        locationInMesh (0.08 -0.1 0.08);
+        allowFreeStandingZoneFaces false;
+    }
+
+    snapControls
+    {
+        nSmoothPatch 5;
+        tolerance 4.0;
+        nSolveIter 300;
+        nRelaxIter 7;
+        nFeatureSnapIter 10;
+        implicitFeatureSnap true;
+        explicitFeatureSnap false;
+        multiRegionFeatureSnap true;
+    }
+
+    addLayersControls
+    {
+        relativeSizes true;
+        layers
+        {
+//				wall1{nSurfaceLayers 5;}			
+//				wall2{nSurfaceLayers 2;}			
+//  			wall3{nSurfaceLayers 2;}			
+//  			wall4{nSurfaceLayers 2;}			
+//  			wall5{nSurfaceLayers 2;}
+//				sphere1{nSurfaceLayers 5;}
+          }
+        expansionRatio 1.05;
+
+
+    // Wanted thickness of final added cell layer. If multiple layers
+    // is the thickness of the layer furthest away from the wall.
+    // Relative to undistorted size of cell outside layer.
+    // See relativeSizes parameter.
+    finalLayerThickness 0.8;
+
+    // Minimum thickness of cell layer. If for any reason layer
+    // cannot be above minThickness do not add layer.
+    // See relativeSizes parameter.
+    minThickness 0.05;
+
+    // If points get not extruded do nGrow layers of connected faces that are
+    // also not grown. This helps convergence of the layer addition process
+    // close to features.
+    nGrow 0;
+
+
+    // Advanced settings
+
+    // When not to extrude surface. 0 is flat surface, 90 is when two faces
+    // are perpendicular
+    featureAngle 30;
+
+    // Maximum number of snapping relaxation iterations. Should stop
+    // before upon reaching a correct mesh.
+    nRelaxIter 5;
+
+    // Number of smoothing iterations of surface normals
+    nSmoothSurfaceNormals 1;
+
+    // Number of smoothing iterations of interior mesh movement direction
+    nSmoothNormals 3;
+
+    // Smooth layer thickness over surface patches
+    nSmoothThickness 10;
+
+    // Stop layer growth on highly warped cells
+    maxFaceThicknessRatio 0.5;
+
+    // Reduce layer growth where ratio thickness to medial
+    // distance is large
+    maxThicknessToMedialRatio 0.3;
+
+    // Angle used to pick up medial axis points
+    minMedialAxisAngle 90;
+
+    // Create buffer region for new layer terminations
+    nBufferCellsNoExtrude 0;
+
+
+    // Overall max number of layer addition iterations. The mesher will exit
+    // if it reaches this number of iterations; possibly with an illegal
+    // mesh.
+    nLayerIter 50;
+
+    // Max number of iterations after which relaxed meshQuality controls
+    // get used. Up to nRelaxIter it uses the settings in meshQualityControls,
+    // after nRelaxIter it uses the values in meshQualityControls::relaxed.
+    nRelaxedIter 20;
+    }
+
+    meshQualityControls
+    {
+        maxNonOrtho 65;
+        maxBoundarySkewness 20;
+        maxInternalSkewness 4;
+        maxConcave 80;
+        minVol 1e-13;
+        minTetQuality -1;
+        minArea -1;
+        minTwist 0.01;
+        minDeterminant 0.001;
+        minFaceWeight 0.05;
+        minVolRatio 0.01;
+        minTriangleTwist -1;
+        nSmoothScale 4;
+        errorReduction 0.75;
+        relaxed
+        {
+            maxNonOrtho 75;
+        }
+    }
+
+    writeFlags
+    (
+        scalarLevels
+        layerFields
+    );
+
+    mergeTolerance 1e-6;
+
+
+// ************************************************************************* //
